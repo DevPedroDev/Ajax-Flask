@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login &EEC</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href=css/estilo.css>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body id="fundo">
+    <div class="card" id="telalogin">
+            <h2>Faça seu login</h2>
+
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                  <label>Login</label>
+                  <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Seu email">
+                  <div class="incorrect" id="Legenda" style="color: red">
+                    *Usuário ou senha incorretos.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Senha</label>
+                  <input type="password" class="form-control" id="pass" placeholder="Informe sua Senha">
+                </div>
+                <div class="button-login">
+                    <button type="button" class="btn btn-primary btn-block " onclick="FazerLogin()">Entrar</button>
+                </div>
+              </form>
+        </div>
+      </div>
+      
+</body>
+<script>
+  document.getElementById("Legenda").style.display='none';
+  function FazerLogin(){
+    var login = document.getElementById('login').value;
+    var senha = document.getElementById("pass").value;
+    
+
+    var data = [
+      {"user":login},
+      {"passw":senha}
+    ];
+
+
+    $.ajax({
+      type: 'POST',
+      url:'/usuario',
+      data: JSON.stringify(data),
+      contentType:"application/json",
+      dataType: 'json',
+      success: function(result){
+        console.log(result);
+        var resultadoBack = result["processed"]
+        if (resultadoBack == 'true') {
+           console.log("Usuário autenticado");
+           location.reload()
+        } else {
+          document.getElementById("Legenda").style.display='block';
+          
+        }
+    
+      }
+
+    });
+  }
+</script>
+</html>

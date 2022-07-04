@@ -1,0 +1,22 @@
+#telalogin {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 5px 30px rgb(201, 48, 48);
+    opacity: 0.8;
+}
+
+#fundo {
+    background-color: rgb(243, 243, 243,);
+    background-image: url("https://images4.alphacoders.com/101/1014888.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h2 {
+    padding-top: 30px;
+    text-align: center;
+}
